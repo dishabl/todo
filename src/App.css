@@ -38,6 +38,7 @@ input.round{
   height: 8vh;
   font-size: medium;
   font-weight: 500;
+  top: 4px;
 }
 
 ::placeholder{
@@ -59,6 +60,32 @@ button.round{
   color: white;
   font-size: large;
   font-weight: 500;
+}
+
+button.taska{
+  border-radius: 10;
+  background-color: #96f;
+  border-color: #96f;
+  color: white;
+  /* font-size: large; */
+  font-weight: 500;
+  height: 50px;
+}
+
+.edit{
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  right: 42px;
+  bottom: 14px;
+}
+
+.trash{
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  right: 12px;
+  bottom: 14px;
 }
 
 .purple-border{

@@ -19,6 +19,7 @@ export default function Frame() {
           <li key={index}>{text}</li>
         ))}
       </ul>
+      <TaskList />
     </div>
   );
 }
