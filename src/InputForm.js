@@ -3,17 +3,28 @@ import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function InputForm({ onTextSubmit }) {
-  const [inputText, setInputText] = useState("");
-  const handleButtonClick = () => {
-    onTextSubmit(inputText);
-    setInputText("");
+  const [text, setText] = useState("");
+  const handleTextChange = (e) => {
+    setText(e.target.value);
   };
+  const handleButtonClick = () => {
+    onTextSubmit(text);
+    setText("");
+  };
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onTextSubmit(text);
+      setText("");
+    }
+  };
+
   return (
     <div class="input-group purple-border my-3">
       <input
         type="text"
-        value={inputText}
-        onChange={(e) => setInputText(e.target.value)}
+        value={text}
+        onChange={handleTextChange}
+        onKeyPress={handleKeyPress}
         class="form-control round"
         placeholder="What is the task today?"
         // aria-label="С текстовым полем"
