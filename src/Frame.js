@@ -6,7 +6,9 @@ import TaskList from "./TaskList";
 export default function Frame() {
   const [textList, setTextList] = useState([]);
   const addText = (text) => {
-    setTextList([...textList, text]);
+    if (text.trim() !== "") {
+      setTextList([...textList, text]);
+    }
   };
   return (
     <div className="Fram">
@@ -14,12 +16,13 @@ export default function Frame() {
       <h1>Get things done!</h1>
       <br />
       <InputForm onTextSubmit={addText} />
-      <ul>
+      <ul className="ull">
         {textList.map((text, index) => (
-          <li key={index}>{text}</li>
+          <li key={index}>
+            <TaskList task={text} />
+          </li>
         ))}
       </ul>
-      <TaskList />
     </div>
   );
 }

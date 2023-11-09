@@ -1,9 +1,20 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root{
+  display: flex;
+  flex-direction: column;
+}
+
 .App {
+  flex: 1;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  height: 100vh;
   background-color: #8758ff;
 }
 
@@ -62,14 +73,22 @@ button.round{
   font-weight: 500;
 }
 
-button.taska{
+.ull{
+  list-style-type:none;
+  padding: 0;
+  margin: 0;
+}
+
+div.taska{
   border-radius: 10;
   background-color: #96f;
   border-color: #96f;
   color: white;
-  /* font-size: large; */
   font-weight: 500;
   height: 50px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: color 0.1s, text-decoration 0.1s;
 }
 
 .edit{
