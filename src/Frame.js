@@ -1,25 +1,26 @@
-import React, { useState } from "react";
-import "./App.css";
+import React, { useState, useRef } from "react";
 import InputForm from "./InputForm";
 import TaskList from "./TaskList";
 
 export default function Frame() {
   const [textList, setTextList] = useState([]);
+  const idCounter = useRef(1);
+
   const addText = (text) => {
     if (text.trim() !== "") {
-      setTextList([...textList, { text, isToggled: false }]);
+      const newTask = { id: idCounter.current++, text, isToggled: false };
+      setTextList([...textList, newTask]);
     }
   };
 
-  const removeText = (index) => {
-    const newList = [...textList];
-    newList.splice(index, 1);
-    setTextList(newList);
+  const handleDelete = (taskId) => {
+    setTextList((prevList) => prevList.filter((task) => task.id !== taskId));
   };
 
-  const toggleText = (index) => {
-    const newList = [...textList];
-    newList[index].isToggled = !newList[index].isToggled;
+  const toggleText = (taskId) => {
+    const newList = textList.map((task) =>
+      task.id === taskId ? { ...task, isToggled: !task.isToggled } : task
+    );
     setTextList(newList);
   };
 
@@ -31,12 +32,13 @@ export default function Frame() {
 
       <InputForm onTextSubmit={addText} />
       <ul className="ull">
-        {textList.map((item, index) => (
-          <li key={index}>
+        {textList.map((item) => (
+          <li key={item.id}>
             <TaskList
               task={item}
-              onToggle={() => toggleText(index)}
-              onDelete={() => removeText(item)}
+              isToggled={item.isToggled}
+              onToggle={() => toggleText(item.id)}
+              onDelete={() => handleDelete(item.id)}
             />
           </li>
         ))}

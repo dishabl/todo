@@ -46,16 +46,17 @@ input.round{
   border: transparent;
   background-color: transparent;
   color: rgb(255, 255, 255) !important;
-  height: 8vh;
+  /* height: 8vh; */
   font-size: medium;
-  font-weight: 500;
-  top: 4px;
+  font-weight: 400;
+  /* padding: 8px 8px; */
+  /* margin: 8px 8px; */
 }
 
 ::placeholder{
   color: #666 !important;
   font-size: large;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 input.round:focus{
@@ -70,7 +71,7 @@ button.round{
   border-color: #96f;
   color: white;
   font-size: large;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .ull{
@@ -84,9 +85,9 @@ div.taska{
   background-color: #96f;
   border-color: #96f;
   color: white;
-  font-weight: 500;
+  font-weight: 400;
   height: 50px;
-  margin-bottom: 10px;
+  margin: 13px 0;
   cursor: pointer;
   transition: color 0.1s, text-decoration 0.1s;
 }
@@ -108,7 +109,7 @@ div.taska{
 }
 
 .purple-border{
-  border: 2px solid #96f;
+  border: 1px solid #96f;
   width: 100%;
   display: flex;
   align-items: center;

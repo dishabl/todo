@@ -1,16 +1,23 @@
-import React, { useState } from "react";
-// import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useState, useEffect, useRef } from "react";
 
 export default function InputForm({ onTextSubmit }) {
   const [text, setText] = useState("");
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
   const handleTextChange = (e) => {
     setText(e.target.value);
   };
+
   const handleButtonClick = () => {
     onTextSubmit(text);
     setText("");
   };
+
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       onTextSubmit(text);
@@ -21,13 +28,13 @@ export default function InputForm({ onTextSubmit }) {
   return (
     <div className="input-group purple-border my-3">
       <input
+        ref={inputRef}
         type="text"
         value={text}
         onChange={handleTextChange}
         onKeyDown={handleKeyPress}
         className="form-control round"
         placeholder="What is the task today?"
-        // aria-label="С текстовым полем"
       ></input>
       <button onClick={handleButtonClick} className="input-group-text round">
         Add task
