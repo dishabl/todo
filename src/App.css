@@ -1,0 +1,226 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root{
+  display: flex;
+  flex-direction: column;
+}
+
+.App {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  background-color: #8758ff;
+  padding: 0px 20px 20px 20px;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #8758ff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+  /* margin-bottom: 5px; */
+}
+
+.toggle-option {
+  width: 70px;
+  height: 33px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  background-color: #1a1a40; 
+  border: 1px solid #8758ff;
+}
+
+.toggle-option.selected {
+  background-color: #8758ff; 
+}
+
+.regItem{
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  /* height: 100vh; */
+  /* width: 90vh; */
+}
+
+.regName{
+  flex: 0 0 auto;
+  /* align-self: flex-start; */
+  /* justify-content: left; */
+}
+
+.registerInput{
+  flex: 0 0 auto;
+  /* align-self: flex-end; */
+  /* justify-content: right; */
+}
+
+.reg{
+  /* display: flex; */
+  width: 100%;
+  /* height: 100%; */
+  flex-direction: column;
+  /* justify-content: space-between; */
+  /* background-color: #61dafb; */
+  /* width: 100%; */ 
+  background-color: #1a1a40;
+  margin: 20px 20px 20px 0px;
+  color: rgb(240, 240, 240);
+  border-radius: 10px;
+  position: relative;
+  padding: 20px;
+}
+
+input.round{
+  border-radius: 0;
+  border: transparent;
+  background-color: transparent;
+  color: rgb(255, 255, 255) !important;
+}
+
+.registerInput{
+  border-radius: 0;
+  background-color: transparent;
+  color: rgb(255, 255, 255) !important;
+  height: 8vh;
+  width: 70%;
+  padding-left: 6px;
+  border-radius: 10;
+  border-color: #96f;
+}
+
+::placeholder{
+  color: #666 !important;
+  font-weight: 500;
+}
+
+input.round:focus{
+  box-shadow: none;
+  background-color: transparent;
+}
+
+input{
+  outline: none;
+}
+
+button.round{
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  background-color: #96f;
+  border-color: #96f;
+  color: white;
+  font-size: small;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+p{
+  padding: 1px;
+  margin-right: 30px;
+}
+
+.ull{
+  list-style-type:none;
+  padding: 0;
+  margin: 0;
+}
+
+div.taska{
+  border-radius: 10;
+  background-color: #96f;
+  border-color: #96f;
+  color: white;
+  font-weight: 500;
+  height: 50px;
+  margin: 13px 0;
+  cursor: pointer;
+  transition: color 0.1s, text-decoration 0.1s;
+}
+
+.edit{
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  right: 42px;
+  bottom: 14px;
+}
+
+.trash{
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  right: 12px;
+  bottom: 14px;
+}
+
+.purple-border{
+  border: 1px solid #96f;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a.App{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+a{
+  color: white;
+  font-weight: 500;
+}
+
+.Fram{
+  width: 100%;
+  background-color: #1a1a40;
+  margin: 20px 20px 20px 0px;
+  color: rgb(240, 240, 240);
+  border-radius: 10px;
+  position: relative;
+  padding: 20px;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
