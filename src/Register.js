@@ -21,7 +21,6 @@ export default function Register() {
           className="regItem"
           style={{
             display: "flex",
-            // justifyContent: "space-between",
           }}
         >
           <p className="regName" style={{ alignItems: "center" }}>
