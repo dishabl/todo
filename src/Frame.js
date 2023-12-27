@@ -26,10 +26,7 @@ export default function Frame() {
 
   return (
     <div>
-      <div
-        className="Fram"
-        // style={{ margin: "20px", padding: "20px" }}
-      >
+      <div className="Fram">
         <br />
         <h1>Get things done!</h1>
         <br />

@@ -1,10 +1,19 @@
 import { Button } from "react-bootstrap";
+import axios from "axios";
+import { Link } from "react-router-dom"; // Добавлен импорт Link
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState } from "react";
 import "./App.css";
+import Log from "./Log";
 
-export default function Register() {
+export default function Register({ history }) {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [gender, setGender] = useState("male");
+  const [age, setAge] = useState("");
+  const [error, setError] = useState("");
+  // const [showLog, setShowLog] = useState(false);
 
   const handleMaleClick = () => {
     setGender("male");
@@ -14,8 +23,36 @@ export default function Register() {
     setGender("female");
   };
 
+  const handleSignUp = async () => {
+    try {
+      const response = await axios.post(
+        "https://todo-redev.herokuapp.com/api-docs/api/users/register",
+        {
+          username,
+          email,
+          password,
+          gender,
+          age,
+        }
+      );
+      console.log(response.data);
+
+      // После успешной регистрации показываем страницу авторизации
+      // setShowLog(true);
+      history.push("/login");
+    } catch (error) {
+      console.error("Ошибка при регистрации:", error);
+      setError(
+        "Произошла ошибка при регистрации. Пожалуйста, попробуйте еще раз."
+      );
+    }
+  };
+
   return (
     <div>
+      {/* {showLog ? ( */}
+      {/* <Log />
+      ) : ( */}
       <div className="reg">
         <div
           className="regItem"
@@ -51,7 +88,6 @@ export default function Register() {
           className="regItem"
           style={{
             display: "flex",
-            //  justifyContent: "space-between"
           }}
         >
           <p className="regName">password</p>
@@ -66,7 +102,6 @@ export default function Register() {
           className="regItem"
           style={{
             display: "flex",
-            // justifyContent: "space-between",
             borderColor: "#96f",
           }}
         >
@@ -92,7 +127,6 @@ export default function Register() {
           className="regItem"
           style={{
             display: "flex",
-            // justifyContent: "space-between"
           }}
         >
           <p className="regName">age</p>
@@ -105,12 +139,22 @@ export default function Register() {
         </div>
         <Button
           className="input-group-text round"
-          style={{ height: "30px", textAlign: "center", lineHeight: "10px" }}
+          style={{
+            height: "30px",
+            textAlign: "center",
+            lineHeight: "10px",
+          }}
+          onClick={handleSignUp}
         >
           Sign Up
         </Button>
         <br />
+        {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
+      {/* )} */}
+
+      {/* Добавленные теги p и a, которые будут отображаться только на странице регистрации */}
+      {/* {!showLog && ( */}
       <div
         style={{
           display: "flex",
@@ -120,10 +164,11 @@ export default function Register() {
         <p style={{ margin: "-2px 3px 0px 0px", color: "white" }}>
           Already have an account?
         </p>
-        <a href="http://onliner.by" style={{ color: "white" }}>
+        <Link to="/login" style={{ color: "white" }}>
           Log in!
-        </a>
+        </Link>
       </div>
+      {/* )} */}
     </div>
   );
 }
