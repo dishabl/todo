@@ -1,10 +1,12 @@
 import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import InputForm from "./InputForm";
 import TaskList from "./TaskList";
 
 export default function Frame() {
   const [textList, setTextList] = useState([]);
   const idCounter = useRef(1);
+  const navigate = useNavigate();
 
   const addText = (text) => {
     if (text.trim() !== "") {
@@ -22,6 +24,14 @@ export default function Frame() {
       task.id === taskId ? { ...task, isToggled: !task.isToggled } : task
     );
     setTextList(newList);
+  };
+
+  const handleLogout = () => {
+    // Реализуйте здесь логику выхода пользователя, например, удаление токена из localStorage
+    localStorage.removeItem("token");
+
+    // Перенаправление на страницу регистрации
+    navigate("/");
   };
 
   return (
@@ -45,7 +55,9 @@ export default function Frame() {
           ))}
         </ul>
       </div>
-      <a href="http://onliner.by">Log out</a>
+      <a href="/" onClick={handleLogout} style={{ color: "white" }}>
+        Log out
+      </a>
     </div>
   );
 }

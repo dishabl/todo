@@ -7,27 +7,16 @@ import Log from "./Log";
 
 function App() {
   return (
-    //{" "}
-    // <Router>
-    <Routes>
-      <Route path="/" element={<Register />} />
-      <Route path="/login" element={<Log />} />
-      <Route path="/frame" element={<Frame />} />
-    </Routes>
-    // </Router>
+    <div className="App">
+      {/* <Router> */}
+      <Routes>
+        <Route path="/" element={<Register />} />
+        <Route path="/login" element={<Log />} />
+        <Route path="/frame" element={<Frame />} />
+      </Routes>
+      {/* </Router> */}
+    </div>
   );
-}
-
-{
-  /* <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Log />} />
-          <Route path="/frame" element={<Frame />} />
-        </Routes>
-      </div>
-    </Router> */
 }
 
 export default App;

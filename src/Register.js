@@ -1,19 +1,23 @@
 import { Button } from "react-bootstrap";
 import axios from "axios";
-import { Link } from "react-router-dom"; // Добавлен импорт Link
+import { Link, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Log from "./Log";
 
 export default function Register({ history }) {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [gender, setGender] = useState("male");
   const [age, setAge] = useState("");
   const [error, setError] = useState("");
-  // const [showLog, setShowLog] = useState(false);
+
+  const handleLoginClick = () => {
+    navigate("/login");
+  };
 
   const handleMaleClick = () => {
     setGender("male");
@@ -25,23 +29,50 @@ export default function Register({ history }) {
 
   const handleSignUp = async () => {
     try {
+      let token;
       const response = await axios.post(
-        "https://todo-redev.herokuapp.com/api-docs/api/users/register",
+        "https://todo-redev.herokuapp.com/api/users/register",
         {
           username,
           email,
           password,
           gender,
-          age,
-        }
+          age: parseInt(age),
+        },
+        { headers: { "Content-Type": "application/json" } }
       );
-      console.log(response.data);
+      // navigate("/frame");
+      if (response) {
+        // Проверка наличия данных в ответе
+        if (response.data) {
+          token = response.data.token;
+          console.log(response.data);
+        } else {
+          console.error(
+            "Ошибка при регистрации: Неверный формат ответа сервера"
+          );
+          setError(
+            "Произошла ошибка при регистрации. Пожалуйста, попробуйте еще раз."
+          );
+          return;
+        }
+      } else {
+        console.error("Ошибка при регистрации: Отсутствует ответ от сервера");
+        setError(
+          "Произошла ошибка при регистрации. Пожалуйста, попробуйте еще раз."
+        );
+        return;
+      }
 
-      // После успешной регистрации показываем страницу авторизации
-      // setShowLog(true);
-      history.push("/login");
+      // localStorage.setItem("token", token);
+      navigate("/login");
+      // history.push("/login");
     } catch (error) {
-      console.error("Ошибка при регистрации:", error);
+      // Обработка ошибки
+      console.error(
+        "Ошибка при регистрации:",
+        error.response?.data || error.message
+      );
       setError(
         "Произошла ошибка при регистрации. Пожалуйста, попробуйте еще раз."
       );
@@ -50,9 +81,6 @@ export default function Register({ history }) {
 
   return (
     <div>
-      {/* {showLog ? ( */}
-      {/* <Log />
-      ) : ( */}
       <div className="reg">
         <div
           className="regItem"
@@ -68,6 +96,7 @@ export default function Register({ history }) {
             className="registerInput"
             style={{ border: "1px solid #96f" }}
             placeholder="Dino_saur_cream"
+            onChange={(e) => setUsername(e.target.value)}
           ></input>
         </div>
         <div
@@ -82,6 +111,7 @@ export default function Register({ history }) {
             className="registerInput"
             style={{ border: "1px solid #96f" }}
             placeholder="Dino_saur_cream@gmail.com"
+            onChange={(e) => setEmail(e.target.value)}
           ></input>
         </div>
         <div
@@ -96,6 +126,7 @@ export default function Register({ history }) {
             className="registerInput"
             style={{ border: "1px solid #96f" }}
             placeholder="secret_info123"
+            onChange={(e) => setPassword(e.target.value)}
           ></input>
         </div>
         <div
@@ -135,6 +166,7 @@ export default function Register({ history }) {
             className="registerInput"
             style={{ border: "1px solid #96f" }}
             placeholder="48"
+            onChange={(e) => setAge(e.target.value)}
           ></input>
         </div>
         <Button
@@ -143,6 +175,7 @@ export default function Register({ history }) {
             height: "30px",
             textAlign: "center",
             lineHeight: "10px",
+            marginTop: "20px",
           }}
           onClick={handleSignUp}
         >
@@ -151,24 +184,32 @@ export default function Register({ history }) {
         <br />
         {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
-      {/* )} */}
-
-      {/* Добавленные теги p и a, которые будут отображаться только на странице регистрации */}
-      {/* {!showLog && ( */}
       <div
         style={{
           display: "flex",
           justifyContent: "center",
         }}
       >
-        <p style={{ margin: "-2px 3px 0px 0px", color: "white" }}>
+        <p style={{ margin: "0px 3px 0px 0px", color: "white" }}>
           Already have an account?
         </p>
-        <Link to="/login" style={{ color: "white" }}>
+        <button
+          onClick={handleLoginClick}
+          style={{
+            color: "white",
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            textDecoration: "underline",
+          }}
+        >
           Log in!
-        </Link>
+        </button>
+        {/* <Link to="/login" style={{ color: "white" }}>
+          {/* <Link href={navigate("/login")} style={{ color: "white" }}> */}
+        {/* Log in!
+        </Link>  */}
       </div>
-      {/* )} */}
     </div>
   );
 }
