@@ -4,8 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import "./App.css";
 
-// ... (ваш импорт и другой код)
-
 export default function Log() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -24,10 +22,7 @@ export default function Log() {
 
       // Проверка успешного ответа от сервера
       if (response && response.data && response.data.token) {
-        // Обработка токена - например, сохранение в localStorage
         localStorage.setItem("token", response.data.token);
-
-        // Перенаправление на страницу frame
         navigate("/frame");
       } else {
         console.error("Ошибка при авторизации: Неверный формат ответа сервера");
@@ -36,7 +31,6 @@ export default function Log() {
         );
       }
     } catch (error) {
-      // Обработка ошибки
       console.error(
         "Ошибка при авторизации:",
         error.response?.data || error.message

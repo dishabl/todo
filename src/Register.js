@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import Log from "./Log";
 
 export default function Register({ history }) {
   const navigate = useNavigate();
@@ -63,12 +62,8 @@ export default function Register({ history }) {
         );
         return;
       }
-
-      // localStorage.setItem("token", token);
       navigate("/login");
-      // history.push("/login");
     } catch (error) {
-      // Обработка ошибки
       console.error(
         "Ошибка при регистрации:",
         error.response?.data || error.message
@@ -205,10 +200,6 @@ export default function Register({ history }) {
         >
           Log in!
         </button>
-        {/* <Link to="/login" style={{ color: "white" }}>
-          {/* <Link href={navigate("/login")} style={{ color: "white" }}> */}
-        {/* Log in!
-        </Link>  */}
       </div>
     </div>
   );

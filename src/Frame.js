@@ -27,10 +27,7 @@ export default function Frame() {
   };
 
   const handleLogout = () => {
-    // Реализуйте здесь логику выхода пользователя, например, удаление токена из localStorage
     localStorage.removeItem("token");
-
-    // Перенаправление на страницу регистрации
     navigate("/");
   };
 
