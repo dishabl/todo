@@ -43,7 +43,6 @@ html, body, #root {
 .toggle-container {
   display: flex;
   align-items: center;
-  /* margin-bottom: 5px; */
 }
 
 .toggle-option {
