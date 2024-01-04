@@ -1,8 +1,8 @@
 import { Button } from "react-bootstrap";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./App.css";
 
 export default function Register({ history }) {
@@ -44,6 +44,7 @@ export default function Register({ history }) {
       if (response) {
         // Проверка наличия данных в ответе
         if (response.data) {
+          // eslint-disable-next-line no-unused-vars
           token = response.data.token;
           console.log(response.data);
         } else {

@@ -10,6 +10,10 @@ export default function Log() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const handleRegisterClick = () => {
+    navigate("/todo");
+  };
+
   const handleLogin = async () => {
     try {
       const response = await axios.post(
@@ -93,12 +97,27 @@ export default function Log() {
         {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <p style={{ margin: "-2px 3px 0px 0px", color: "white" }}>
+        {/* <p style={{ margin: "-5px 5px 0px 0px", color: "white" }}>
           Don't have an account?
         </p>
-        <Link to="/" style={{ color: "white" }}>
+        <Link to="/todo" style={{ color: "white" }}>
           Sign up!
-        </Link>
+        </Link> */}
+        <p style={{ margin: "0px 3px 0px 0px", color: "white" }}>
+          Don't have an account?
+        </p>
+        <button
+          onClick={handleRegisterClick}
+          style={{
+            color: "white",
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            textDecoration: "underline",
+          }}
+        >
+          Sign up!
+        </button>
       </div>
     </div>
   );

@@ -1,12 +1,18 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import InputForm from "./InputForm";
 import TaskList from "./TaskList";
 
 export default function Frame() {
-  const [textList, setTextList] = useState([]);
+  const [textList, setTextList] = useState(
+    JSON.parse(localStorage.getItem("textList")) || []
+  );
   const idCounter = useRef(1);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    localStorage.setItem("textList", JSON.stringify(textList));
+  }, [textList]);
 
   const addText = (text) => {
     if (text.trim() !== "") {
@@ -52,7 +58,7 @@ export default function Frame() {
           ))}
         </ul>
       </div>
-      <a href="/" onClick={handleLogout} style={{ color: "white" }}>
+      <a href="/todo" onClick={handleLogout} style={{ color: "white" }}>
         Log out
       </a>
     </div>

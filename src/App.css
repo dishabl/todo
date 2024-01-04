@@ -15,7 +15,7 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   background-color: #8758ff;
-  padding: 0px 20px 20px 20px;
+  padding: 20px 20px 20px 20px;
 }
 
 .App-logo {
@@ -89,7 +89,7 @@ html, body, #root {
   width: 100%;
   flex-direction: column;
   background-color: #1a1a40;
-  margin: 20px 20px 20px 0px;
+  /* margin: 20px 20px 20px 0px; */
   color: rgb(240, 240, 240);
   border-radius: 10px;
   position: relative;
@@ -186,18 +186,6 @@ div.taska{
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-a.App{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-a{
-  color: white;
-  font-weight: 400;
 }
 
 .Fram{
