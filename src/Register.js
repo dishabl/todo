@@ -75,6 +75,12 @@ export default function Register({ history }) {
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSignUp();
+    }
+  };
+
   return (
     <div>
       <div className="reg">
@@ -91,6 +97,7 @@ export default function Register({ history }) {
             type="text"
             className="registerInput"
             style={{ border: "1px solid #96f" }}
+            onKeyDown={handleKeyDown}
             placeholder="Dino_saur_cream"
             onChange={(e) => setUsername(e.target.value)}
           ></input>
@@ -106,6 +113,7 @@ export default function Register({ history }) {
             type="text"
             className="registerInput"
             style={{ border: "1px solid #96f" }}
+            onKeyDown={handleKeyDown}
             placeholder="Dino_saur_cream@gmail.com"
             onChange={(e) => setEmail(e.target.value)}
           ></input>
@@ -121,15 +129,17 @@ export default function Register({ history }) {
             type="text"
             className="registerInput"
             style={{ border: "1px solid #96f" }}
+            onKeyDown={handleKeyDown}
             placeholder="secret_info123"
             onChange={(e) => setPassword(e.target.value)}
           ></input>
         </div>
         <div
-          className="regItem"
+          className="gender-container"
           style={{
             display: "flex",
             borderColor: "#96f",
+            justifyContent: "space-between",
           }}
         >
           <p className="regName">gender</p>
@@ -150,6 +160,7 @@ export default function Register({ history }) {
             </div>
           </div>
         </div>
+        {/* </div> */}
         <div
           className="regItem"
           style={{
@@ -161,6 +172,7 @@ export default function Register({ history }) {
             type="text"
             className="registerInput"
             style={{ border: "1px solid #96f" }}
+            onKeyDown={handleKeyDown}
             placeholder="48"
             onChange={(e) => setAge(e.target.value)}
           ></input>
@@ -186,7 +198,7 @@ export default function Register({ history }) {
           justifyContent: "center",
         }}
       >
-        <p style={{ margin: "0px 3px 0px 0px", color: "white" }}>
+        <p style={{ margin: "0px 3px 0px 0px !important", color: "white" }}>
           Already have an account?
         </p>
         <button

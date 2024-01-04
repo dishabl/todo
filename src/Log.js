@@ -45,6 +45,12 @@ export default function Log() {
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleLogin();
+    }
+  };
+
   return (
     <div>
       <div className="Fram">
@@ -62,6 +68,7 @@ export default function Log() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="registerInput"
+          onKeyDown={handleKeyDown}
           style={{ border: "1px solid #96f" }}
           placeholder="dino_saur_cream@gmail.com"
         ></input>
@@ -81,6 +88,7 @@ export default function Log() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="registerInput"
+          onKeyDown={handleKeyDown}
           style={{ border: "1px solid #96f" }}
           placeholder="secret_info123"
         ></input>
@@ -97,7 +105,7 @@ export default function Log() {
         {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <p style={{ margin: "0px 3px 0px 0px", color: "white" }}>
+        <p style={{ margin: "0px 3px 0px 0px !important", color: "white" }}>
           Don't have an account?
         </p>
         <button
