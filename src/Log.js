@@ -97,12 +97,6 @@ export default function Log() {
         {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        {/* <p style={{ margin: "-5px 5px 0px 0px", color: "white" }}>
-          Don't have an account?
-        </p>
-        <Link to="/todo" style={{ color: "white" }}>
-          Sign up!
-        </Link> */}
         <p style={{ margin: "0px 3px 0px 0px", color: "white" }}>
           Don't have an account?
         </p>
