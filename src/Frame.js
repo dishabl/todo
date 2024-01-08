@@ -2,12 +2,12 @@ import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import InputForm from "./InputForm";
 import TaskList from "./TaskList";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Frame() {
   const [textList, setTextList] = useState(
     JSON.parse(localStorage.getItem("textList")) || []
   );
-  const idCounter = useRef(1);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,7 +16,7 @@ export default function Frame() {
 
   const addText = (text) => {
     if (text.trim() !== "") {
-      const newTask = { id: idCounter.current++, text, isToggled: false };
+      const newTask = { id: uuidv4(), text, isToggled: false };
       setTextList([...textList, newTask]);
     }
   };
