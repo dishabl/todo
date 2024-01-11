@@ -8,7 +8,6 @@ import { v4 as uuidv4 } from "uuid";
 export default function Frame() {
   const [textList, setTextList] = useState([]);
   const navigate = useNavigate();
-
   const addText = async (text) => {
     if (text.trim() !== "") {
       try {
