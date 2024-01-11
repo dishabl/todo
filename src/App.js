@@ -5,7 +5,7 @@ import Frame from "./Frame";
 import Register from "./Register";
 import Log from "./Log";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       {/* <Router> */}
@@ -18,5 +18,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

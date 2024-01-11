@@ -1,33 +1,112 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import InputForm from "./InputForm";
 import TaskList from "./TaskList";
 import { v4 as uuidv4 } from "uuid";
 
 export default function Frame() {
-  const [textList, setTextList] = useState(
-    JSON.parse(localStorage.getItem("textList")) || []
-  );
+  const [textList, setTextList] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    localStorage.setItem("textList", JSON.stringify(textList));
-  }, [textList]);
-
-  const addText = (text) => {
+  const addText = async (text) => {
     if (text.trim() !== "") {
-      const newTask = { id: uuidv4(), text, isToggled: false };
-      setTextList([...textList, newTask]);
+      try {
+        const response = await axios.post(
+          `${process.env.REACT_APP_API_URL}/todos`,
+          {
+            title: text,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        const newTask = response.data;
+        setTextList((prevList) => [...prevList, newTask]);
+      } catch (error) {
+        console.error(
+          "Ошибка при создании задачи:",
+          error.response?.data || error.message
+        );
+      }
     }
   };
 
-  const handleDelete = (taskId) => {
-    setTextList((prevList) => prevList.filter((task) => task.id !== taskId));
+  const fetchTasks = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/todos`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      const tasks = response.data;
+      setTextList(tasks);
+    } catch (error) {
+      console.error(
+        "Ошибка при получении списка задач:",
+        error.response?.data || error.message
+      );
+    }
   };
 
-  const toggleText = (taskId) => {
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
+  const handleDelete = async (taskId) => {
+    try {
+      await axios.delete(`${process.env.REACT_APP_API_URL}/todos/${taskId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      setTextList((prevList) => prevList.filter((task) => task.id !== taskId));
+    } catch (error) {
+      console.error(
+        "Ошибка при удалении задачи:",
+        error.response?.data || error.message
+      );
+    }
+  };
+
+  const handleToggle = async (taskId, isToggled) => {
+    try {
+      const response = await axios.patch(
+        `${process.env.REACT_APP_API_URL}/todos/${taskId}/isCompleted`,
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      setTextList((prevList) =>
+        prevList.map((task) =>
+          task.id === taskId
+            ? { ...task, isCompleted: !task.isCompleted }
+            : task
+        )
+      );
+    } catch (error) {
+      console.error(
+        "Ошибка при изменении статуса задачи:",
+        error.response?.data || error.message
+      );
+    }
+  };
+
+  const handleEdit = (taskId, newText) => {
     const newList = textList.map((task) =>
-      task.id === taskId ? { ...task, isToggled: !task.isToggled } : task
+      task.id === taskId ? { ...task, text: newText } : task
     );
     setTextList(newList);
   };
@@ -43,22 +122,21 @@ export default function Frame() {
         <br />
         <h1>Get things done!</h1>
         <br />
-
         <InputForm onTextSubmit={addText} />
         <ul className="ull">
           {textList.map((item) => (
             <li key={item.id}>
               <TaskList
                 task={item}
-                isToggled={item.isToggled}
-                onToggle={() => toggleText(item.id)}
                 onDelete={() => handleDelete(item.id)}
+                onToggle={(isToggled) => handleToggle(item.id, isToggled)}
+                onEdit={() => handleEdit()}
               />
             </li>
           ))}
         </ul>
       </div>
-      <a href="/todo" onClick={handleLogout} style={{ color: "white" }}>
+      <a href="/login" onClick={handleLogout} style={{ color: "white" }}>
         Log out
       </a>
     </div>

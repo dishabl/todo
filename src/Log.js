@@ -9,24 +9,22 @@ export default function Log() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
   const handleRegisterClick = () => {
     navigate("/todo");
   };
-
   const handleLogin = async () => {
     try {
       const response = await axios.post(
-        "https://todo-redev.herokuapp.com/api/auth/login",
+        `${process.env.REACT_APP_API_URL}/auth/login`,
         {
-          email: email,
-          password: password,
+          email,
+          password,
         }
       );
 
-      // Проверка успешного ответа от сервера
-      if (response && response.data && response.data.token) {
-        localStorage.setItem("token", response.data.token);
+      if (response.status === 200) {
+        const token = response.data.token;
+        localStorage.setItem("token", token);
         navigate("/frame");
       } else {
         console.error("Ошибка при авторизации: Неверный формат ответа сервера");
@@ -44,13 +42,11 @@ export default function Log() {
       );
     }
   };
-
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleLogin();
     }
   };
-
   return (
     <div>
       <div className="Fram">

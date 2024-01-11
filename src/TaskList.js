@@ -1,40 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import trash from "./trash.png";
+import axios from "axios";
 import edit from "./edit.png";
+import { useState, useEffect } from "react";
 
-export default function TaskList({ task, onDelete }) {
-  const { id, text } = task;
+export default function TaskList({ task, onDelete, onToggle, onEdit }) {
+  const { id, title, isCompleted } = task;
+  const [editedText, setEditedText] = useState(title);
   const [isEditing, setIsEditing] = useState(false);
-  const [editedText, setEditedText] = useState(text);
-  const [originalText, setOriginalText] = useState({
-    text,
-    isToggled: false,
-    prevIsToggled: false,
-  });
 
   useEffect(() => {
-    setEditedText(originalText.text);
-  }, [originalText.text]);
+    setEditedText(title);
+  }, [title]);
 
-  const handleEdit = () => {
-    setOriginalText((prev) => ({ ...prev, prevIsToggled: prev.isToggled }));
+  const handleEdit = (e) => {
+    e.stopPropagation();
     setIsEditing(true);
   };
 
   const handleUpdate = () => {
-    setOriginalText((prev) => ({
-      ...prev,
-      text: editedText,
-      isToggled: prev.prevIsToggled,
-    }));
+    onEdit(id, editedText);
     setIsEditing(false);
   };
 
   const handleTextClick = () => {
-    setOriginalText((prev) => ({
-      ...prev,
-      isToggled: !prev.isToggled,
-    }));
+    onToggle(id);
   };
 
   const handleTextChange = (e) => {
@@ -68,11 +58,11 @@ export default function TaskList({ task, onDelete }) {
           className="input-group-text taska input-group"
           onClick={handleTextClick}
           style={{
-            textDecoration: originalText.isToggled ? "line-through" : "none",
-            color: originalText.isToggled ? "rgb(120, 120, 120)" : "white",
+            textDecoration: isCompleted ? "line-through" : "none",
+            color: isCompleted ? "rgb(120, 120, 120)" : "white",
           }}
         >
-          {originalText.text}
+          {editedText}
           <button className="edit" onClick={handleEdit}>
             <img src={edit} alt="edit" height="20" />
           </button>

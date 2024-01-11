@@ -15,29 +15,22 @@ export default function Register({ history }) {
     age: "",
     error: "",
   });
-
   const { username, email, password, gender, age, error } = formData;
-
   const handleLoginClick = () => {
     navigate("/login");
   };
-
   const handleMaleClick = () => {
     setFormData((prevData) => ({ ...prevData, gender: "male" }));
   };
-
   const handleFemaleClick = () => {
     setFormData((prevData) => ({ ...prevData, gender: "female" }));
   };
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
-
   const handleSignUp = async () => {
     try {
-      let token;
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/users/register`,
         {
@@ -49,32 +42,18 @@ export default function Register({ history }) {
         },
         { headers: { "Content-Type": "application/json" } }
       );
-
-      if (response) {
-        if (response.data) {
-          token = response.data.token;
-          console.log(response.data);
-        } else {
-          console.error(
-            "Ошибка при регистрации: Неверный формат ответа сервера"
-          );
-          setFormData((prevData) => ({
-            ...prevData,
-            error:
-              "Произошла ошибка при регистрации. Пожалуйста, попробуйте еще раз.",
-          }));
-          return;
-        }
+      if (response && response.data && response.data.token) {
+        const token = response.data.token;
+        localStorage.setItem("token", token);
+        navigate("/frame");
       } else {
-        console.error("Ошибка при регистрации: Отсутствует ответ от сервера");
+        console.error("Ошибка при регистрации: Неверный формат ответа сервера");
         setFormData((prevData) => ({
           ...prevData,
           error:
             "Произошла ошибка при регистрации. Пожалуйста, попробуйте еще раз.",
         }));
-        return;
       }
-      navigate("/login");
     } catch (error) {
       console.error(
         "Ошибка при регистрации:",
@@ -87,13 +66,11 @@ export default function Register({ history }) {
       }));
     }
   };
-
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleSignUp();
     }
   };
-
   return (
     <div>
       <div className="reg">
@@ -176,7 +153,6 @@ export default function Register({ history }) {
             </div>
           </div>
         </div>
-        {/* </div> */}
         <div
           className="regItem"
           style={{
