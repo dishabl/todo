@@ -10,7 +10,7 @@ export default function Log() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const handleRegisterClick = () => {
-    navigate("/todo");
+    navigate("/register");
   };
   const handleLogin = async () => {
     try {
@@ -49,6 +49,10 @@ export default function Log() {
   };
   return (
     <div>
+      <h1 style={{ fontWeight: "800", marginBottom: "0" }}>
+        ToDo App | Log in
+      </h1>
+      <br />
       <div className="Fram">
         <p
           style={{

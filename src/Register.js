@@ -17,7 +17,7 @@ export default function Register({ history }) {
   });
   const { username, email, password, gender, age, error } = formData;
   const handleLoginClick = () => {
-    navigate("/login");
+    navigate("/todo");
   };
   const handleMaleClick = () => {
     setFormData((prevData) => ({ ...prevData, gender: "male" }));
@@ -73,6 +73,10 @@ export default function Register({ history }) {
   };
   return (
     <div>
+      <h1 style={{ fontWeight: "800", marginBottom: "0" }}>
+        ToDo App | Register
+      </h1>
+      <br />
       <div className="reg">
         <div
           className="regItem"
