@@ -10,7 +10,7 @@ export default function Log() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const handleRegisterClick = () => {
-    navigate("/register");
+    navigate("/todo/register");
   };
   const handleLogin = async () => {
     try {
@@ -25,7 +25,7 @@ export default function Log() {
       if (response.status === 200) {
         const token = response.data.token;
         localStorage.setItem("token", token);
-        navigate("/todolist");
+        navigate("/todo/todolist");
       } else {
         console.error("Ошибка при авторизации: Неверный формат ответа сервера");
         setError(
