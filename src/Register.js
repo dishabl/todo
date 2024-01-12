@@ -17,7 +17,7 @@ export default function Register({ history }) {
   });
   const { username, email, password, gender, age, error } = formData;
   const handleLoginClick = () => {
-    navigate("/todo/log");
+    navigate("/todo");
   };
   const handleMaleClick = () => {
     setFormData((prevData) => ({ ...prevData, gender: "male" }));

@@ -13,10 +13,9 @@ export default function App() {
       {/* <BrowserRouter> */}
       {/* <Router> */}
       <Routes>
-        <Route path="/todo/register" element={<Register />} />
-        <Route path="/" element={<Log />} />
-        <Route path="/todo/log" element={<Log />} />
-        <Route path="/todo/todolist" element={<Frame />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/todo" element={<Log />} />
+        <Route path="/frame" element={<Frame />} />
       </Routes>
       {/* </Router> */}
       {/* </BrowserRouter> */}
