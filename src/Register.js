@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState } from "react";
 import "./App.css";
 
-export default function Register({ history }) {
+export default function Register() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
@@ -15,20 +15,26 @@ export default function Register({ history }) {
     age: "",
     error: "",
   });
+
   const { username, email, password, gender, age, error } = formData;
+
   const handleLoginClick = () => {
-    navigate("/todo");
+    navigate("/todo/login");
   };
+
   const handleMaleClick = () => {
     setFormData((prevData) => ({ ...prevData, gender: "male" }));
   };
+
   const handleFemaleClick = () => {
     setFormData((prevData) => ({ ...prevData, gender: "female" }));
   };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
+
   const handleSignUp = async () => {
     try {
       const response = await axios.post(
@@ -42,10 +48,11 @@ export default function Register({ history }) {
         },
         { headers: { "Content-Type": "application/json" } }
       );
-      if (response && response.data && response.data.token) {
+
+      if (response.status === 200) {
         const token = response.data.token;
         localStorage.setItem("token", token);
-        navigate("/frame");
+        navigate("/todo/login");
       } else {
         console.error("Ошибка при регистрации: Неверный формат ответа сервера");
         setFormData((prevData) => ({
@@ -53,19 +60,33 @@ export default function Register({ history }) {
           error:
             "Произошла ошибка при регистрации. Пожалуйста, попробуйте еще раз.",
         }));
+        console.error("Ошибка при регистрации:", response.statusText);
       }
     } catch (error) {
       console.error(
         "Ошибка при регистрации:",
         error.response?.data || error.message
       );
-      setFormData((prevData) => ({
-        ...prevData,
-        error:
-          "Произошла ошибка при регистрации. Пожалуйста, попробуйте еще раз.",
-      }));
+
+      if (
+        error.response &&
+        error.response.status === 400 &&
+        error.response.data === "Введенные username и email уже используются"
+      ) {
+        setFormData((prevData) => ({
+          ...prevData,
+          error: "Такой пользователь уже зарегистрирован.",
+        }));
+      } else {
+        setFormData((prevData) => ({
+          ...prevData,
+          error:
+            "Произошла ошибка при регистрации. Пожалуйста, попробуйте еще раз.",
+        }));
+      }
     }
   };
+
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleSignUp();

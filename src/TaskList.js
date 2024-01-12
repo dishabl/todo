@@ -36,7 +36,65 @@ export default function TaskList({ task, onDelete, onToggle, onEdit }) {
       handleUpdate();
     }
   };
+  // const handleDelete = async () => {
+  // try {
+  //   await axios.delete(`${process.env.REACT_APP_API_URL}/todos/${id}`, {
+  //     headers: {
+  //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //     },
+  //   });
 
+  // После успешного удаления, вызываем onDelete без параметров
+  // onDelete();
+  // } catch (error) {
+  //   console.error(
+  //     "Ошибка при удалении задачи:",
+  //     error.response?.data || error.message
+  //   );
+  // }
+  // };
+
+  // const handleToggle = async () => {
+  //   try {
+  //     const response = await axios.patch(
+  //       `${process.env.REACT_APP_API_URL}/todos/${id}/isCompleted`,
+  //       null,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //         },
+  //       }
+  //     );
+
+  //     const updatedTask = response.data;
+  //     onToggle(updatedTask.isCompleted);
+  //   } catch (error) {
+  //     console.error(
+  //       "Ошибка при изменении статуса задачи:",
+  //       error.response?.data || error.message
+  //     );
+  //   }
+  // };
+
+  //   return (
+  //     <div className="input-group-text taska input-group" onClick={onToggle}>
+  //       <span
+  //         style={{
+  //           textDecoration: isCompleted ? "line-through" : "none",
+  //           color: isCompleted ? "rgb(120, 120, 120)" : "white",
+  //         }}
+  //       >
+  //         {title}
+  //       </span>
+  //       <button className="edit" onClick={handleEdit}>
+  //         <img src={edit} alt="edit" height="20" />
+  //       </button>
+  //       <button className="trash" onClick={onDelete}>
+  //         <img src={trash} alt="trash" height="20" />
+  //       </button>
+  //     </div>
+  //   );
+  // }
   return (
     <div>
       {isEditing ? (
@@ -62,7 +120,7 @@ export default function TaskList({ task, onDelete, onToggle, onEdit }) {
             color: isCompleted ? "rgb(120, 120, 120)" : "white",
           }}
         >
-          {editedText}
+          {editedText} {/* Используем editedText вместо text */}
           <button className="edit" onClick={handleEdit}>
             <img src={edit} alt="edit" height="20" />
           </button>

@@ -8,27 +8,13 @@ import Log from "./Log";
 export default function App() {
   return (
     <div className="App">
-      {/* basename={process.env.PUBLIC_URL} */}
-      {/* basename={window.location.pathname || ""} */}
-      {/* <BrowserRouter> */}
       {/* <Router> */}
       <Routes>
-        <Route path="/register" element={<Register />} />
-        <Route path="/todo" element={<Log />} />
-        <Route path="/frame" element={<Frame />} />
+        <Route path="/todo" element={<Register />} />
+        <Route path="/todo/login" element={<Log />} />
+        <Route path="/todo/frame" element={<Frame />} />
       </Routes>
       {/* </Router> */}
-      {/* </BrowserRouter> */}
-      {/* <footer
-        style={{
-          opacity: "0.5",
-          fontSize: "0.85em",
-          color: "black",
-          marginTop: "60px",
-        }}
-      >
-        Create app 2024
-      </footer> */}
     </div>
   );
 }

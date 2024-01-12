@@ -8,13 +8,14 @@ import { v4 as uuidv4 } from "uuid";
 export default function Frame() {
   const [textList, setTextList] = useState([]);
   const navigate = useNavigate();
+
   const addText = async (text) => {
     if (text.trim() !== "") {
       try {
         const response = await axios.post(
           `${process.env.REACT_APP_API_URL}/todos`,
           {
-            title: text,
+            title: text, // Обновляем отправляемое свойство на 'title'
           },
           {
             headers: {
@@ -88,6 +89,8 @@ export default function Frame() {
           },
         }
       );
+
+      // const updatedTask = response.data;
       setTextList((prevList) =>
         prevList.map((task) =>
           task.id === taskId
@@ -135,7 +138,7 @@ export default function Frame() {
           ))}
         </ul>
       </div>
-      <a href="/todo" onClick={handleLogout} style={{ color: "white" }}>
+      <a href="/todo/login" onClick={handleLogout} style={{ color: "white" }}>
         Log out
       </a>
     </div>
