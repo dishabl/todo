@@ -25,7 +25,7 @@ export default function Log() {
       if (response.status === 200) {
         const token = response.data.token;
         localStorage.setItem("token", token);
-        navigate("/frame");
+        navigate("/todolist");
       } else {
         console.error("Ошибка при авторизации: Неверный формат ответа сервера");
         setError(

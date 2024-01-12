@@ -135,7 +135,7 @@ export default function Frame() {
           ))}
         </ul>
       </div>
-      <a href="/todo" onClick={handleLogout} style={{ color: "white" }}>
+      <a href="/log" onClick={handleLogout} style={{ color: "white" }}>
         Log out
       </a>
     </div>

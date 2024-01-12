@@ -2,17 +2,21 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-// import { BrowserRouter as Router } from "react-router-dom";
-import { BrowserRouter } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  BrowserRouter,
+} from "react-router-dom"; // import { HashRouter } from "react-router-dom";
 // import { HashRouter as Router } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  // <BrowserRouter basename={process.env.PUBLIC_URL}>
-  /* <Router> */
-  <App />
-  /* </Router> */
+  // <BrowserRouter>
+  <Router>
+    <App />
+  </Router>
   // </BrowserRouter>
 );
 
